@@ -1,6 +1,7 @@
 package com.group.goodgames.sudoku;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -12,22 +13,33 @@ import android.widget.TextView;
  */
 
 public class SudokuAdapter extends BaseAdapter {
+    private static final int BOARD_SIZE = 81;
     private Context mContext;
-    private String[] mMatrix = {
-           "1", "2", "3", "4", "5", "6", "7", "8", "9"
-    };
+    private SudokuMatrixData mSudokuMatrixData;
 
     public SudokuAdapter(Context context) {
         mContext = context;
+        mSudokuMatrixData = new SudokuMatrixData();
+        initBoard();
+    }
+
+    private void initBoard() {
+        mSudokuMatrixData.setValue(1, 1, 8);
+        mSudokuMatrixData.setValue(5, 8, 7);
+        mSudokuMatrixData.setValue(0, 0, 1);
+        mSudokuMatrixData.setValue(1, 7, 9);
     }
 
     @Override
     public int getCount() {
-        return (mMatrix.length * 9);
+        return BOARD_SIZE;
     }
 
     public Object getItem(int id) {
-        return mMatrix[(id % 9)];
+        int row = (id % 9) - 1;
+        int col = id / 9;
+        Log.i("Adapter", "row: " + row + " col: " + col);
+        return mSudokuMatrixData.getValue(row, col);
     }
 
     @Override
@@ -46,7 +58,11 @@ public class SudokuAdapter extends BaseAdapter {
         } else {
             textView = (TextView) convertView;
         }
-        textView.setText(mMatrix[position % 9]);
+        int row = position / 9;
+        int col = (position % 9);
+        Log.i("Adapter", "position: " + position + "row: " + row + " col: " + col);
+        String value = mSudokuMatrixData.getValue(row, col);
+        textView.setText(value);
         return textView;
     }
 
