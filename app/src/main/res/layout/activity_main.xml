@@ -10,16 +10,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Here is your board"/>
-    <GridView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/gridView"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:columnWidth="90dp"
-        android:numColumns="9"
-        android:verticalSpacing="10dp"
-        android:horizontalSpacing="10dp">
-    </GridView>
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:background="@color/colorPrimaryDark">
+        <GridView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/gridView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnWidth="90dp"
+            android:numColumns="9"
+            android:verticalSpacing="3dp"
+            android:horizontalSpacing="3dp">
+        </GridView>
+    </FrameLayout>
 
 
 </LinearLayout>
